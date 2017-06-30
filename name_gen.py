@@ -21,12 +21,12 @@ class GeneticAlgorithm:
     def __init__(self, crossover_rate, mutation_rate, population_size, chromosome_size_range, fitness, rank_selection=True, changing_population_size=False):
         '''
         __init__(crossover_rate, mutation_rate, population_size, chromosome_size_range, fitness)
-        
         crossover_rate: a float [0,1] denoting the chance of a crossover
         mutation_rate: a float [0,1] denoting the chance of a mutation
         population_size: the size of the chromosome population; keep large for a larger variety of names, decrease the mutation rate etc accordingly
         chromosome_size_range: [] containing integers denoting possible sizes of the output
         fitness: a function that, when given a chromosome as input, returns its fitness(an arbitrary number denoting how suitable a chromosome is for the task at hand)
+        rank_selection: when true, rank selection is chosen as the selection for next gen
         changing_population_size: when true, the population halves every 10 generations then grows back
         '''
         self.fitness = fitness
@@ -72,7 +72,7 @@ class GeneticAlgorithm:
 
         Main loop goes about incrementing generations until atleast one of the above conditions is met.
         '''
-        
+
         gencount = 0
         fitness_max = 0
         while gencount<generations and fitness_max<fitness_thresh:
@@ -84,7 +84,6 @@ class GeneticAlgorithm:
             fitness_max = max(self.fitnesses)
             print(fitness_max)
 
-        
     def __weighted_random_choice(self):
         '''
         __weighted_random_choice() -> chromosome []
